@@ -322,11 +322,12 @@ export default function ZanqirPage() {
             <div className="font-headline-sm text-lg text-on-surface mb-1 font-bold">ZANQIR</div>
             <p className="font-label-sm text-xs text-on-surface-variant opacity-60">© 2024 DEEPINDER SINGH. BUILT FOR THE NEURAL AGE.</p>
           </div>
-          <div className="flex gap-6">
-            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://x.com" target="_blank" rel="noopener noreferrer">X</a>
-            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+          <div className="flex flex-wrap gap-6">
+            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://www.linkedin.com/in/deepinder-singh-april2007/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://github.com/Singh08042007" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://www.instagram.com/deep__cheema__2007/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://www.youtube.com/@cheema3364" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a className="text-on-surface-variant font-label-sm text-xs hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100" href="https://www.hackerrank.com/profile/Singh2007" target="_blank" rel="noopener noreferrer">HackerRank</a>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></div>

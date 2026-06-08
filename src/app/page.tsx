@@ -146,12 +146,20 @@ export default function HomePage() {
               Engineering the <span onClick={handleSecretClick} className="cursor-default select-none">next generation</span> of cognitive compute fabrics, neural integrations, and intelligent systems in the neural age.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full sm:w-auto pt-4">
               <a 
                 href="/#contact"
                 className="btn-premium px-8 py-3.5 rounded-xl text-on-primary-fixed font-label-md text-sm font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(0,219,233,0.25)] hover:shadow-[0_0_35px_rgba(0,219,233,0.45)] text-center"
               >
                 Initiate Contact
+              </a>
+              <a 
+                href="https://deepindersinghresume.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 rounded-xl border border-secondary/35 text-secondary hover:border-secondary hover:bg-secondary/5 transition-all duration-300 font-label-md text-sm font-bold tracking-wider uppercase text-center"
+              >
+                Resume
               </a>
               <Link 
                 href="/archive" 
@@ -466,7 +474,9 @@ export default function HomePage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-primary-fixed">mail</span>
-                  <span className="font-label-md text-sm md:text-base">deepinder.ai@systems.com</span>
+                  <a href="mailto:singdeepinder416@gmail.com" className="font-label-md text-sm md:text-base text-on-surface hover:text-primary-fixed transition-colors">
+                    singdeepinder416@gmail.com
+                  </a>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-primary-fixed">location_on</span>
@@ -555,11 +565,12 @@ export default function HomePage() {
             <h4 className="font-headline-sm text-lg text-on-surface mb-1 font-bold">DEEPINDER SINGH</h4>
             <p className="font-label-sm text-xs text-on-surface-variant">© 2024 DEEPINDER SINGH. BUILT FOR THE NEURAL AGE.</p>
           </div>
-          <div className="flex gap-6">
-            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://x.com" target="_blank" rel="noopener noreferrer">X</a>
-            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://scholar.google.com" target="_blank" rel="noopener noreferrer">Scholar</a>
+          <div className="flex flex-wrap gap-6">
+            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://www.linkedin.com/in/deepinder-singh-april2007/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://github.com/Singh08042007" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://www.instagram.com/deep__cheema__2007/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://www.youtube.com/@cheema3364" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a className="font-label-sm text-xs text-on-surface-variant hover:text-primary-fixed transition-colors" href="https://www.hackerrank.com/profile/Singh2007" target="_blank" rel="noopener noreferrer">HackerRank</a>
           </div>
         </div>
       </footer>

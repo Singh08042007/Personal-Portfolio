@@ -53,6 +53,14 @@ export default function Navbar() {
           >
             Zanqir
           </Link>
+          <a 
+            href="https://deepindersinghresume.netlify.app/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-label-md text-label-md text-on-surface-variant hover:text-primary-fixed hover:bg-white/5 transition-all duration-300 px-3 py-1.5 rounded"
+          >
+            Resume
+          </a>
           
           <Link 
             href="/#contact"
@@ -111,6 +119,15 @@ export default function Navbar() {
           >
             Zanqir
           </Link>
+          <a 
+            href="https://deepindersinghresume.netlify.app/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsOpen(false)}
+            className="font-label-md text-on-surface-variant hover:text-primary-fixed py-2 border-b border-white/5"
+          >
+            Resume
+          </a>
           <Link 
             href="/#contact"
             onClick={() => setIsOpen(false)}
