@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DS.AI | Portfolio &amp; Certifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#004f54",
+                        "background": "#020203",
+                        "primary-fixed": "#7df4ff",
+                        "on-surface": "#e5e2e3",
+                        "on-tertiary-fixed": "#0d1c2d",
+                        "inverse-primary": "#006970",
+                        "on-primary-fixed": "#002022",
+                        "tertiary": "#f2f6ff",
+                        "on-tertiary-container": "#516073",
+                        "surface-container-high": "#2a2a2b",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-error-container": "#ffdad6",
+                        "on-surface-variant": "#b9cacb",
+                        "on-primary-container": "#006970",
+                        "tertiary-fixed": "#d4e4fa",
+                        "outline": "#849495",
+                        "on-tertiary": "#233143",
+                        "outline-variant": "#3b494b",
+                        "surface-tint": "#00dbe9",
+                        "surface": "#131314",
+                        "primary-container": "#00f0ff",
+                        "secondary": "#ecb2ff",
+                        "surface-container-highest": "#353436",
+                        "surface-bright": "#3a393a",
+                        "primary": "#dbfcff",
+                        "tertiary-container": "#ccdbf1",
+                        "surface-dim": "#131314",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#313031",
+                        "on-background": "#e5e2e3",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-primary": "#00363a",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "secondary-fixed": "#f8d8ff",
+                        "on-secondary": "#520071",
+                        "surface-container-low": "#1c1b1c",
+                        "inverse-surface": "#e5e2e3",
+                        "surface-variant": "#353436",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "surface-container": "#201f20",
+                        "secondary-container": "#cf5cff",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-secondary-container": "#480063",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "on-secondary-fixed": "#320047"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #020203;
+            color: #e5e2e3;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(15, 15, 18, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(132, 148, 149, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .glass-card:hover {
+            border-color: rgba(125, 244, 255, 0.4);
+            box-shadow: 0 0 25px rgba(0, 219, 233, 0.15);
+        }
+        .project-tilt {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+        }
+        .project-tilt:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(2deg);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 20px rgba(0, 219, 233, 0.3);
+        }
+        .search-glow:focus {
+            box-shadow: 0 0 15px rgba(0, 219, 233, 0.4);
+            background: rgba(28, 27, 28, 0.7);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-stagger > * {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .animate-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+        .animate-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+        .animate-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+        .animate-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+        .animate-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+        .animate-stagger > *:nth-child(6) { animation-delay: 0.6s; }
+
+        .cert-card { transition: all 0.4s ease; }
+        .cert-card.hidden-card {
+            opacity: 0;
+            transform: scale(0.9) translateY(10px);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cf5cff;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(0,219,233,0.1)]">
+<div class="flex justify-between items-center max-w-[1440px] mx-auto px-margin-desktop h-20">
+<div class="font-display-lg text-display-lg-mobile md:text-[32px] tracking-tighter text-primary-fixed">DS.AI</div>
+<div class="hidden md:flex gap-lg items-center">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary-fixed transition-all duration-300" href="#">Research</a>
+<a class="text-primary-fixed font-bold border-b-2 border-primary-fixed font-label-md text-label-md transition-all duration-300" href="#">Projects</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary-fixed transition-all duration-300" href="#">Experience</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary-fixed transition-all duration-300" href="#">Expertise</a>
+</div>
+<button class="bg-gradient-to-r from-primary-fixed-dim to-secondary-container text-on-primary-fixed px-md py-xs rounded-full font-label-md text-label-md font-bold scale-95 active:scale-90 transition-transform neon-glow-primary">
+                Connect
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-xl px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<!-- Hero Section / Context -->
+<section class="mb-xl">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-sm">Neural Archive</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">A curated collection of research, engineering feats, and technical certifications representing the intersection of artificial intelligence and systems design.</p>
+</section>
+<!-- Certificates Section -->
+<section class="mb-xl">
+<div class="flex flex-col md:flex-row justify-between items-end gap-md mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary-fixed">Certificates</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Validated technical proficiency</p>
+</div>
+<div class="flex flex-col md:flex-row gap-md w-full md:w-auto">
+<!-- Search -->
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full md:w-64 bg-surface-container-low/40 border border-white/10 rounded-lg pl-10 pr-base py-xs font-label-md text-label-md focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed outline-none transition-all search-glow" id="cert-search" placeholder="Search credentials..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex gap-xs" id="filter-buttons">
+<button class="filter-btn px-md py-xs rounded-full bg-primary-container/20 text-primary-fixed border border-primary-fixed font-label-sm text-label-sm transition-colors" data-filter="all">All</button>
+<button class="filter-btn px-md py-xs rounded-full bg-surface-container-low border border-white/5 text-on-surface-variant hover:border-primary-fixed/40 transition-all font-label-sm text-label-sm" data-filter="ai">AI</button>
+<button class="filter-btn px-md py-xs rounded-full bg-surface-container-low border border-white/5 text-on-surface-variant hover:border-primary-fixed/40 transition-all font-label-sm text-label-sm" data-filter="web-dev">Web Dev</button>
+<button class="filter-btn px-md py-xs rounded-full bg-surface-container-low border border-white/5 text-on-surface-variant hover:border-primary-fixed/40 transition-all font-label-sm text-label-sm" data-filter="cloud">Cloud</button>
+</div>
+</div>
+</div>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md animate-stagger" id="cert-grid">
+<!-- Certificate 1 -->
+<div class="glass-card cert-card rounded-xl group cursor-pointer" data-category="ai" onclick="openLightbox('ai-cert')">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" data-alt="A highly detailed close-up of a professional digital certificate for Advanced Artificial Intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyB9X50QvwbEbdA3ShSw42G-dJ7eWQeAY3XyDusKiYLsJc43E_yiODxX3yUcj09NyNNNOuDMP5ASnHGSqLmwGWn1bwAUz7y0DSRqyRfjeKp6xYelyp6knRvdCmoNymc-LG6OvJyHh9R_PFXdhPL19RSntY6K90Rghgle1teA9plpbuGswp5IbvkUTIPTr5kqQTxSaFw9Gugto_veG9j9uxrrJo4n_VsGVoMFt1SL6b8BSKD2eO3cIXd0Tuy_OGHvoDYbd686YcFAc"/>
+<div class="absolute inset-0 bg-primary-fixed/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed text-4xl" data-weight="fill">zoom_in</span>
+</div>
+</div>
+<div class="p-md">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-widest">AI &amp; Machine Learning</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-xs">Deep Neural Networks Specialist</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">NVIDIA Deep Learning Institute</p>
+</div>
+</div>
+<!-- Certificate 2 -->
+<div class="glass-card cert-card rounded-xl group cursor-pointer" data-category="cloud" onclick="openLightbox('cloud-cert')">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" data-alt="A premium cloud architect certification displayed as a sleek digital asset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJzx22mtvwgNfDLwhoYlsU6UPb0eqy7Nb2sqifuXJmGx4EFWADQUdudtHjivisY3ikNTbJhwJilLUFteVPZu_1bx8wfGFmElVI0IsaL6n0D3cZEA4ltfUCbZm7pDCOO6iivsYuecSuztq0w9bQKpBvrL_fso-OwVFO-mT6Yl5aZ50PyRPhGehdRKTmMNLonCb3H1geBNP68nSugYbsqFpOJa-P8aGlabKy6qVVjv01Dzmo9SKP2_9I-WpakpFmykvZREhPEcvxFQ8"/>
+<div class="absolute inset-0 bg-primary-fixed/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed text-4xl" data-weight="fill">zoom_in</span>
+</div>
+</div>
+<div class="p-md">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-widest">Cloud Computing</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-xs">AWS Certified Solutions Architect</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Amazon Web Services</p>
+</div>
+</div>
+<!-- Certificate 3 -->
+<div class="glass-card cert-card rounded-xl group cursor-pointer" data-category="web-dev" onclick="openLightbox('web-cert')">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" data-alt="A high-fidelity web development certification with a focus on React." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOnIC0wJKkx8I6EcU8MGMB9aTGRCzZSVJjlH7Y7GqWzXCa4Hi6g2iRr164JqsZKwbVZGH0B4aIlRbYDs4QW00_76KnmlAWGVyjnWTcoqRq8hEj4Qrs7PY6FskDJeovUzZRkxzvjupQAACFtHhaZ5Crc79e-Ru9U3_7LG6lnP1uir_EX7eSmIcFDrmnLDcpzmUeDzSBCfPOISdUac8bpgPUvQsRfHDei-slD_aGgbCXKe89209WiH5kWR6lid1P8drI8sMO5rSAab8"/>
+<div class="absolute inset-0 bg-primary-fixed/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed text-4xl" data-weight="fill">zoom_in</span>
+</div>
+</div>
+<div class="p-md">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-widest">Web Development</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-xs">Full-Stack Engineering</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Meta Professional Certification</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section class="mb-xl">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-secondary">Neural Forge: Projects</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Engineering functional systems</p>
+</div>
+<!-- Bento-style Grid -->
+<div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-md auto-rows-fr animate-stagger">
+<!-- Main Featured -->
+<div class="md:col-span-6 lg:col-span-8 glass-card project-tilt rounded-2xl p-lg flex flex-col justify-between group">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="bg-primary-container/10 text-primary-fixed border border-primary-fixed/30 px-md py-xs rounded-full font-label-sm text-label-sm">Flagship Product</span>
+<div class="flex gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed cursor-pointer transition-colors">hub</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed cursor-pointer transition-colors">open_in_new</span>
+</div>
+</div>
+<h3 class="font-display-lg text-display-lg-mobile md:text-headline-lg text-on-surface mb-sm">College Life Management App</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">A comprehensive ERP-inspired ecosystem for students to manage schedules, academic resources, and campus integration. Built with React Native and Node.js.</p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="px-sm py-1 bg-surface-container-highest rounded font-label-sm text-label-sm text-on-surface">React Native</span>
+<span class="px-sm py-1 bg-surface-container-highest rounded font-label-sm text-label-sm text-on-surface">Firebase</span>
+<span class="px-sm py-1 bg-surface-container-highest rounded font-label-sm text-label-sm text-on-surface">Tailwind CSS</span>
+<span class="px-sm py-1 bg-surface-container-highest rounded font-label-sm text-label-sm text-on-surface">Python</span>
+</div>
+</div>
+<div class="relative h-64 w-full rounded-xl overflow-hidden mt-md">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-end futuristic dashboard for a college management application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA2MQ76j0MMaVaJQHK837OGgOrvO2CY6Qzq2uwXvnkvxrEjB3dB8v95wucVVOJ2d92Ny8iiyq8PBJMUiTLLI3zZ_Ww59wlQ08Yvk04_PkG9bPwdzxyiTFLQPcQH1YC15cqEBIfc-HFZrtTTnvAwvCbMvZLlseg-yLXh-CYFx09sUcxZFCz2OHZftPaBrhY0-fbWvejCONScoGuvpB4La7y2BqC4UZ1PUMm2iIY2xATxplNSYU9DnSuF3dc1fVv5T9iYiwaXNajje4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+</div>
+<!-- FinPilot Card -->
+<div class="md:col-span-6 lg:col-span-4 glass-card project-tilt rounded-2xl p-lg flex flex-col group">
+<div class="mb-md">
+<div class="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-md border border-secondary/20">
+<span class="material-symbols-outlined text-secondary">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">FinPilot</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">AI-powered financial assistant for micro-investing and portfolio optimization using predictive analytics.</p>
+</div>
+<div class="mt-auto space-y-md">
+<div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-3/4 shadow-[0_0_8px_rgba(236,178,255,0.6)]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Status: Active Alpha</span>
+<button class="text-secondary font-label-md text-label-md flex items-center gap-xs hover:gap-md transition-all">Explore <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+</div>
+</div>
+<!-- Engineering Notes -->
+<div class="md:col-span-3 lg:col-span-4 glass-card project-tilt rounded-2xl p-lg flex flex-col justify-center">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Engineering Notes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">A centralized repository of markdown-based technical documentation for core CS subjects.</p>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-[10px] font-bold">DS</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-on-surface text-[10px]">+12</div>
+</div>
+</div>
+<!-- Games: Chess & Racing -->
+<div class="md:col-span-3 lg:col-span-4 glass-card project-tilt rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A cinematic, high-contrast shot of a sleek chess set." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrkkaFlPoWBaz3zuzW0hvyvCZCNDsBdkNf0CAXBZKdgw-_m9XmqjS3_oT-2DfmNZsPKGN_ad1uEmt2cukbrRZc5gcyHKb_cC-hd43QcstQvXtB02nDhy1cuKB60rYEFBNjh25XaJzO5bY1GxD910Cwae3fYCTdbV2qD2KfJBZ2Dv7h1-s8YNs19OI1jvAc-8aKf8g8fWkc710vdUcxp2PNMp1Qt_44yWDom9IqDCzZ5m6cwIb1VqzjjiU7JSTrhEJbELRnu3rRx48"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent p-lg flex flex-col justify-end">
+<h3 class="font-headline-md text-headline-md text-on-surface">Neural Chess</h3>
+<p class="font-label-md text-label-md text-primary-fixed">Unity • AI Adversary</p>
+</div>
+</div>
+<div class="md:col-span-6 lg:col-span-4 glass-card project-tilt rounded-2xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-speed neon car racing scene." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLZobGPRpElDvJN7xzga9UvEaQTp4H7JiQzota2xge8xNtEjdU-2cdxGHL4es1QfscbXjRcZLWwSn7fFZGCsS73vgmcRBZWEtDixC1IKryLYVQkA64VQ2P7j70TRZY77_SSBJS5xmRW9F9VwPhVIJmFPioU7PZoC-GxG3EPh-TAMx1SL5ac8ttgVdXdVtb-q5bS6wTcKxg-DmSDhqaBgfit0YMY7HhSSAem4AbWwSyzihnB8eLsTVHHYnQt2jHd8QAhUW12jIZreU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent p-lg flex flex-col justify-end">
+<h3 class="font-headline-md text-headline-md text-on-surface">Vector Velocity</h3>
+<p class="font-label-md text-label-md text-secondary">Web-GL • Racing Engine</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-surface-container-lowest border-t border-white/5 opacity-80 hover:opacity-100 transition-opacity">
+<div class="max-w-[1440px] mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="font-headline-sm text-headline-sm text-on-surface">DS.AI</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 DEEPINDER SINGH. BUILT FOR THE NEURAL AGE.</p>
+<div class="flex gap-lg">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">LinkedIn</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">GitHub</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">X</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Scholar</a>
+</div>
+</div>
+</footer>
+<!-- Lightbox Modal -->
+<div class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-2xl flex items-center justify-center p-md hidden" id="lightbox">
+<button class="absolute top-md right-md text-on-surface hover:text-primary-fixed transition-colors" onclick="closeLightbox()">
+<span class="material-symbols-outlined text-4xl">close</span>
+</button>
+<div class="max-w-4xl w-full glass-card rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-auto object-contain max-h-[819px]" id="lightbox-img" src=""/>
+<div class="p-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary-fixed mb-xs" id="lightbox-title"></h2>
+<p class="font-body-md text-body-md text-on-surface-variant" id="lightbox-desc"></p>
+</div>
+</div>
+</div>
+<script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const certCards = document.querySelectorAll('.cert-card');
+        const searchInput = document.getElementById('cert-search');
+
+        function updateGallery() {
+            const activeFilter = document.querySelector('.filter-btn.bg-primary-container\\/20').dataset.filter;
+            const searchTerm = searchInput.value.toLowerCase();
+
+            certCards.forEach(card => {
+                const category = card.dataset.category;
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const provider = card.querySelector('p').textContent.toLowerCase();
+                
+                const matchesFilter = activeFilter === 'all' || category === activeFilter;
+                const matchesSearch = title.includes(searchTerm) || provider.includes(searchTerm);
+
+                if (matchesFilter && matchesSearch) {
+                    card.classList.remove('hidden-card');
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.classList.add('hidden-card');
+                        card.style.display = 'none';
+                    }, 400);
+                }
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-primary-container/20', 'text-primary-fixed', 'border-primary-fixed');
+                    b.classList.add('bg-surface-container-low', 'border-white/5', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary-container/20', 'text-primary-fixed', 'border-primary-fixed');
+                btn.classList.remove('bg-surface-container-low', 'border-white/5', 'text-on-surface-variant');
+                updateGallery();
+            });
+        });
+
+        searchInput.addEventListener('input', updateGallery);
+
+        function openLightbox(type) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const title = document.getElementById('lightbox-title');
+            const desc = document.getElementById('lightbox-desc');
+
+            if (type === 'ai-cert') {
+                img.src = 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop';
+                title.textContent = 'Deep Neural Networks Specialist';
+                desc.textContent = 'Validated proficiency in building and training complex neural architectures, including CNNs and Transformers, through the NVIDIA DLI curriculum.';
+            } else if (type === 'cloud-cert') {
+                img.src = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop';
+                title.textContent = 'AWS Solutions Architect';
+                desc.textContent = 'Certification covering robust, scalable, and secure cloud infrastructure design utilizing Amazon Web Services core offerings.';
+            } else if (type === 'web-cert') {
+                img.src = 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1000&auto=format&fit=crop';
+                title.textContent = 'Full-Stack Engineering';
+                desc.textContent = 'A comprehensive professional certification from Meta focused on modern frontend frameworks and backend integration.';
+            }
+
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Project card parallax/tilt effect refined
+        document.querySelectorAll('.project-tilt').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+
+        // Simple mouse trail effect for atmosphere
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.createElement('div');
+            glow.className = 'fixed pointer-events-none w-32 h-32 bg-primary-fixed/5 rounded-full blur-3xl z-[-1]';
+            glow.style.left = e.clientX - 64 + 'px';
+            glow.style.top = e.clientY - 64 + 'px';
+            document.body.appendChild(glow);
+            setTimeout(() => glow.remove(), 1000);
+        });
+    </script>
+</body></html>

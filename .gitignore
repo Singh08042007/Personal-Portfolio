@@ -1,0 +1,41 @@
+# Next.js Build Output
+.next/
+out/
+build/
+
+# Dependency Directories
+node_modules/
+jspm_packages/
+.pnp
+.pnp.js
+
+# Environment Files (CONTAINS SECRETS - DO NOT COMMIT!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug and Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# System and IDE Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript Build Info
+*.tsbuildinfo
+
+# Vercel Cache
+.vercel/
