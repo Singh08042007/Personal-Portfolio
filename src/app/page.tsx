@@ -181,8 +181,8 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-24 px-margin-mobile md:px-margin-desktop overflow-hidden">
-        {/* Asymmetrical Layout Container */}
-        <div className="max-w-[1440px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 relative py-12 md:py-24">
+        {/* Desktop Asymmetrical Layout Container - Hidden on mobile, grid on medium screens and up */}
+        <div className="hidden md:grid max-w-[1440px] w-full mx-auto grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 relative py-12 md:py-24">
           
           {/* Left Column: Headline and Actions */}
           <div className="lg:col-span-7 space-y-6 text-left flex flex-col items-start">
@@ -290,6 +290,104 @@ export default function HomePage() {
             </div>
           </div>
           
+        </div>
+
+        {/* Mobile Layout Container - Block on mobile, hidden on medium screens and up */}
+        <div className="block md:hidden w-full z-10 relative py-8 px-4">
+          <div className="flex flex-col items-center text-center space-y-6 w-full">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-container/10 border border-primary-fixed/20 text-primary-fixed font-label-sm text-[10px] tracking-wider uppercase font-semibold">
+              <span className="w-2 h-2 rounded-full bg-primary-container blink-dot"></span>
+              System Node // Active Mobile
+            </div>
+            
+            <h1 className="font-display-lg text-4xl tracking-tighter text-on-surface font-extrabold neon-text-glow leading-none uppercase">
+              DEEPINDER<br />
+              <span className="text-gradient-zanqir">SINGH</span>
+            </h1>
+            
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-on-surface-variant font-body-md text-[10px] uppercase tracking-widest font-bold border-r border-white/10 pr-2">Node</span>
+              <div className="title-rotator-container font-headline-md text-sm text-secondary-fixed-dim">
+                <div className="rotating-list">
+                  <p>AI & Data Science Student</p>
+                  <p>Founder & CEO @ Zanqir</p>
+                  <p>Campus Ambassador</p>
+                  <p>Builder & Innovator</p>
+                  <p>AI & Data Science Student</p>
+                </div>
+              </div>
+            </div>
+            
+            <p className="font-body-md text-xs text-on-surface-variant max-w-sm leading-relaxed px-2">
+              Engineering the <span onClick={handleSecretClick} className="cursor-default select-none">next generation</span> of cognitive compute fabrics, neural integrations, and intelligent systems.
+            </p>
+
+            {/* Mobile HUD Dashboard */}
+            <div className="w-full max-w-sm glass-card p-4 rounded-xl border-white/10 shadow-lg relative overflow-hidden">
+              <div className="flex justify-between items-center pb-2.5 mb-3 border-b border-white/5">
+                <div className="flex gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#ff5f56]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#27c93f]"></span>
+                </div>
+                <span className="font-label-sm text-[8px] text-on-surface-variant/40 tracking-wider font-mono">mobile_hud.sh</span>
+                <span className="w-2"></span>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-2.5 text-left">
+                <div className="p-2.5 bg-surface-container-highest/20 rounded-lg border border-white/5">
+                  <p className="font-bold text-primary-fixed uppercase tracking-wider text-[8px] mb-0.5">Temp</p>
+                  <p className="font-mono text-sm font-bold text-on-surface transition-all duration-500">{coreTemp}°C</p>
+                </div>
+                <div className="p-2.5 bg-surface-container-highest/20 rounded-lg border border-white/5">
+                  <p className="font-bold text-primary-fixed uppercase tracking-wider text-[8px] mb-0.5">Load</p>
+                  <p className="font-mono text-sm font-bold text-on-surface transition-all duration-500">{systemLoad}%</p>
+                </div>
+                <div className="p-2.5 bg-surface-container-highest/20 rounded-lg border border-white/5">
+                  <p className="font-bold text-secondary uppercase tracking-wider text-[8px] mb-0.5">Ping</p>
+                  <p className="font-mono text-sm font-bold text-on-surface transition-all duration-500">{pingRate}ms</p>
+                </div>
+                <div className="p-2.5 bg-surface-container-highest/20 rounded-lg border border-white/5">
+                  <p className="font-bold text-secondary uppercase tracking-wider text-[8px] mb-0.5">Auth</p>
+                  <p className="font-mono text-[9px] font-bold text-primary-fixed uppercase tracking-wider transition-all duration-500">{authStatus}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Actions CTAs */}
+            <div className="flex flex-col gap-2.5 w-full max-w-xs pt-2">
+              <a 
+                href="/#contact"
+                className="btn-premium w-full py-3 rounded-xl text-on-primary-fixed font-label-md text-xs font-bold tracking-wider uppercase text-center shadow-[0_0_15px_rgba(0,219,233,0.2)]"
+              >
+                Initiate Contact
+              </a>
+              
+              <div className="grid grid-cols-2 gap-2.5">
+                <a 
+                  href="https://deepindersinghresume.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 rounded-xl border border-secondary/35 text-secondary hover:border-secondary hover:bg-secondary/5 transition-all duration-300 font-label-md text-xs font-bold tracking-wider uppercase text-center"
+                >
+                  Resume
+                </a>
+                <Link 
+                  href="/zanqir" 
+                  className="w-full py-3 rounded-xl glass-card text-on-surface hover:bg-white/10 transition-all duration-300 font-label-md text-xs font-bold tracking-wider uppercase text-center"
+                >
+                  Zanqir
+                </Link>
+              </div>
+              
+              <Link 
+                href="/archive" 
+                className="w-full py-3 rounded-xl border border-primary-fixed/30 text-primary-fixed hover:border-primary-fixed hover:bg-primary-fixed/5 transition-all duration-300 font-label-md text-xs font-bold tracking-wider uppercase text-center"
+              >
+                Explore Archive
+              </Link>
+            </div>
+          </div>
         </div>
         
         {/* Dynamic Ambient Background Glow Elements */}
