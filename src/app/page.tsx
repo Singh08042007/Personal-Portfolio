@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ParticleBackground from '@/components/ParticleBackground';
 import { portfolioService, Achievement, Project, TimelineEvent, Profile } from '@/services/portfolioService';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function HomePage() {
   const router = useRouter();
@@ -27,6 +28,12 @@ export default function HomePage() {
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
   const [profileImageUrl, setProfileImageUrl] = useState('');
   const [loading, setLoading] = useState(true);
+
+  // System HUD states
+  const [coreTemp, setCoreTemp] = useState(42);
+  const [systemLoad, setSystemLoad] = useState(14);
+  const [pingRate, setPingRate] = useState(18);
+  const [authStatus, setAuthStatus] = useState('SECURED');
 
   // Form states
   const [formName, setFormName] = useState('');
@@ -71,6 +78,66 @@ export default function HomePage() {
       }
     }
     loadData();
+  }, []);
+
+  // Live System Metrics Updates
+  useEffect(() => {
+    // 1. Core Temp & System Load fluctuations
+    const statsInterval = setInterval(() => {
+      setCoreTemp(prev => {
+        const delta = Math.random() > 0.5 ? 1 : -1;
+        return Math.min(46, Math.max(38, prev + delta));
+      });
+      setSystemLoad(prev => {
+        const delta = Math.floor(Math.random() * 5) - 2; // -2 to +2
+        return Math.min(25, Math.max(5, prev + delta));
+      });
+    }, 3000);
+
+    // 2. Measure actual network ping rate
+    const measurePing = async () => {
+      try {
+        const start = performance.now();
+        await fetch('/?t=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+        const latency = Math.round(performance.now() - start);
+        setPingRate(latency);
+      } catch (e) {
+        setPingRate(Math.floor(Math.random() * 10) + 12);
+      }
+    };
+
+    measurePing();
+    const pingInterval = setInterval(measurePing, 5000);
+
+    // 3. Auth status connection
+    const checkAuthStatus = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          setAuthStatus('ADMIN');
+        } else {
+          setAuthStatus('SECURED');
+        }
+      } catch (e) {
+        setAuthStatus('OFFLINE');
+      }
+    };
+    checkAuthStatus();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        setAuthStatus('ADMIN');
+      } else {
+        setAuthStatus('SECURED');
+      }
+    });
+
+    return () => {
+      clearInterval(statsInterval);
+      clearInterval(pingInterval);
+      subscription.unsubscribe();
+    };
   }, []);
 
   // Handle Contact Form Submit
@@ -210,13 +277,13 @@ export default function HomePage() {
                 <div className="pt-4 mt-4 border-t border-white/5 grid grid-cols-2 gap-4 text-[11px] text-on-surface-variant/60">
                   <div>
                     <p className="font-bold text-primary-fixed uppercase tracking-wider text-[9px] mb-1">Compute Status</p>
-                    <p>Core Temp: <span className="text-on-surface">42°C</span></p>
-                    <p>System Load: <span className="text-on-surface">14%</span></p>
+                    <p>Core Temp: <span className="text-on-surface transition-all duration-500">{coreTemp}°C</span></p>
+                    <p>System Load: <span className="text-on-surface transition-all duration-500">{systemLoad}%</span></p>
                   </div>
                   <div>
                     <p className="font-bold text-secondary uppercase tracking-wider text-[9px] mb-1">Nexus Latency</p>
-                    <p>Ping Rate: <span className="text-on-surface">18ms</span></p>
-                    <p>Auth Status: <span className="text-primary-fixed font-semibold">SECURED</span></p>
+                    <p>Ping Rate: <span className="text-on-surface transition-all duration-500">{pingRate}ms</span></p>
+                    <p>Auth Status: <span className="text-primary-fixed font-semibold uppercase transition-all duration-500">{authStatus}</span></p>
                   </div>
                 </div>
               </div>
