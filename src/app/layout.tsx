@@ -18,6 +18,9 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: 'Deepinder Singh | AI Researcher & Founder',
   description: 'B.Tech AI & Data Science student, Founder & CEO at Zanqir. Engineering the next generation of intelligent systems.',
+  icons: {
+    icon: 'https://i.postimg.cc/RhFFpxdP/Round-Profile-image.png',
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +36,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" 
           rel="stylesheet" 
         />
+        <link rel="icon" href="https://i.postimg.cc/RhFFpxdP/Round-Profile-image.png" />
       </head>
       <body className="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container font-sans min-h-screen flex flex-col justify-between">
         <Navbar />
