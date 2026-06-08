@@ -69,7 +69,13 @@ export default function HomePage() {
         setFeaturedProjects(projData.filter((p) => p.featured));
         setTimelineEvents(timelineData);
         if (profileData && profileData.avatar_url) {
-          setProfileImageUrl(profileData.avatar_url);
+          if (profileData.avatar_url.includes('lh3.googleusercontent.com')) {
+            setProfileImageUrl("https://i.postimg.cc/RhFFpxdP/Round-Profile-image.png");
+          } else {
+            setProfileImageUrl(profileData.avatar_url);
+          }
+        } else {
+          setProfileImageUrl("https://i.postimg.cc/RhFFpxdP/Round-Profile-image.png");
         }
       } catch (err) {
         console.error('Failed to load portfolio homepage data:', err);
@@ -411,7 +417,7 @@ export default function HomePage() {
               <img 
                 alt="Deepinder Singh Professional Portrait" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
-                src={profileImageUrl || "https://lh3.googleusercontent.com/aida-public/AB6AXuBD7qPMu2tjuczyAR46HMu7L58vgIJCPl1yEG7rNDaHe8Abo-0onjjCDnpLwL5P2zXtXXiIYMeKKwzgzxfAcKpIWX81oRcmZmK9bfw2m1qxTsa0cMIuZahiZsL-vnTdY6ajUAXyKYPjiNpubiYKdkh4hau-x5yTOTkbOEbMPOummSdS_lDky--FLtANP_DrwSJ330ctVKyZco8h45iTgGeU2e-Ghdebo_v8PeYZt-KAydhBpNLhlAklc5dGRBvJBqhTHhfszcQMgfI"}
+                src={profileImageUrl || "https://i.postimg.cc/RhFFpxdP/Round-Profile-image.png"}
               />
             </div>
           </div>

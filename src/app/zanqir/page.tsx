@@ -89,7 +89,7 @@ export default function ZanqirPage() {
               <img 
                 alt="Deepinder Singh" 
                 className="w-full h-full object-cover" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuemSmcNjR9DU8uCOfur4MGuDJXVMmsm9Cc_ulEJ2wgESTkzZ8q47DPFBOqoo4c4hgBQm8HuFlw02zggs_bWjZsAlZBfgnPWvrxWVMoNSljyFBGEJQHlIDiCEbFUledLn_kPfuZiFHc8YZPYxDulY9PakBT3-e3zjnnILrceqTAqpx48ev-wJBbdLxlJIU3HCCq87RvasPYCWtmh-h1Muvu7MIMiYGO72zNo4_na_eX38YhFu9HGSb-TYsTet-N6XbFHpfci14z8M"
+                src="https://i.postimg.cc/RhFFpxdP/Round-Profile-image.png"
               />
             </div>
             <div>
