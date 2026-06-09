@@ -282,12 +282,24 @@ export default function ArchivePage() {
                     </span>
                     <div className="flex gap-4">
                       {projects[0].github_url && (
-                        <a href={projects[0].github_url} target="_blank" rel="noopener noreferrer" className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors">
+                        <a 
+                          href={projects[0].github_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors"
+                        >
                           code
                         </a>
                       )}
                       {projects[0].live_url && (
-                        <a href={projects[0].live_url} target="_blank" rel="noopener noreferrer" className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors">
+                        <a 
+                          href={projects[0].live_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors"
+                        >
                           open_in_new
                         </a>
                       )}
@@ -317,13 +329,45 @@ export default function ArchivePage() {
                 className="md:col-span-6 lg:col-span-4 glass-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group cursor-pointer"
               >
                 <div>
-                  <div className="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 border border-secondary/20">
-                    <span className="material-symbols-outlined text-secondary">payments</span>
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center border border-secondary/20">
+                      <span className="material-symbols-outlined text-secondary">payments</span>
+                    </div>
+                    <div className="flex gap-4">
+                      {projects[1].github_url && (
+                        <a 
+                          href={projects[1].github_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors"
+                        >
+                          code
+                        </a>
+                      )}
+                      {projects[1].live_url && (
+                        <a 
+                          href={projects[1].live_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors"
+                        >
+                          open_in_new
+                        </a>
+                      )}
+                    </div>
                   </div>
                   <h3 className="font-headline-md text-xl md:text-2xl text-on-surface mb-2 font-bold">{projects[1].title}</h3>
                   <p className="font-body-md text-sm text-on-surface-variant mb-6">{projects[1].description}</p>
                 </div>
                 <div className="mt-auto space-y-4">
+                  {projects[1].image_url && (
+                    <div className="relative h-40 w-full rounded-xl overflow-hidden mb-4 bg-black/40">
+                      <img src={projects[1].image_url} alt={projects[1].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                    </div>
+                  )}
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {projects[1].tech_stack.map((tech, i) => (
                       <span key={i} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface">
@@ -336,10 +380,6 @@ export default function ArchivePage() {
                   </div>
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-on-surface-variant font-semibold">Status: Active Development</span>
-                    <div className="flex gap-2">
-                      {projects[1].github_url && <a href={projects[1].github_url} className="text-secondary hover:text-white transition-colors">Code</a>}
-                      {projects[1].live_url && <a href={projects[1].live_url} className="text-secondary hover:text-white transition-colors">Launch</a>}
-                    </div>
                   </div>
                 </div>
               </div>
@@ -349,20 +389,57 @@ export default function ArchivePage() {
             {projects[2] && (
               <div 
                 onClick={() => handleProjectClick(projects[2].id)}
-                className="md:col-span-3 lg:col-span-4 glass-card rounded-2xl p-6 flex flex-col justify-center cursor-pointer hover:border-primary-fixed/40"
+                className="md:col-span-3 lg:col-span-4 glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer hover:border-primary-fixed/40 group"
               >
-                <h3 className="font-headline-md text-lg md:text-xl text-on-surface mb-2 font-bold">{projects[2].title}</h3>
-                <p className="font-body-md text-xs text-on-surface-variant mb-4">{projects[2].description}</p>
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {projects[2].tech_stack.map((tech, i) => (
-                    <span key={i} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface-variant">
-                      {tech}
-                    </span>
-                  ))}
+                <div>
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="font-label-sm text-[10px] text-primary-fixed uppercase tracking-wider font-mono">Bento Node // 03</span>
+                    <div className="flex gap-4">
+                      {projects[2].github_url && (
+                        <a 
+                          href={projects[2].github_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors"
+                        >
+                          code
+                        </a>
+                      )}
+                      {projects[2].live_url && (
+                        <a 
+                          href={projects[2].live_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors"
+                        >
+                          open_in_new
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <h3 className="font-headline-md text-lg md:text-xl text-on-surface mb-2 font-bold">{projects[2].title}</h3>
+                  <p className="font-body-md text-xs text-on-surface-variant mb-4">{projects[2].description}</p>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {projects[2].tech_stack.map((tech, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface-variant">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex -space-x-2 mt-2">
-                  <div className="w-8 h-8 rounded-full border-2 border-surface bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-[10px] font-bold">DS</div>
-                  <div className="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-on-surface text-[10px]">+8</div>
+                <div className="mt-auto space-y-4">
+                  {projects[2].image_url && (
+                    <div className="relative h-40 w-full rounded-xl overflow-hidden bg-black/40">
+                      <img src={projects[2].image_url} alt={projects[2].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                    </div>
+                  )}
+                  <div className="flex -space-x-2 mt-2">
+                    <div className="w-8 h-8 rounded-full border-2 border-surface bg-primary-fixed flex items-center justify-center text-on-primary-fixed text-[10px] font-bold">DS</div>
+                    <div className="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center text-on-surface text-[10px]">+8</div>
+                  </div>
                 </div>
               </div>
             )}
@@ -373,6 +450,30 @@ export default function ArchivePage() {
                 onClick={() => handleProjectClick(projects[3].id)}
                 className="md:col-span-3 lg:col-span-4 glass-card rounded-2xl overflow-hidden relative group cursor-pointer aspect-square md:aspect-auto"
               >
+                <div className="absolute top-4 right-4 flex gap-2 z-10">
+                  {projects[3].github_url && (
+                    <a 
+                      href={projects[3].github_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      onClick={(e) => e.stopPropagation()}
+                      className="material-symbols-outlined text-white hover:text-primary-fixed transition-colors bg-black/50 p-1.5 rounded-full backdrop-blur-sm"
+                    >
+                      code
+                    </a>
+                  )}
+                  {projects[3].live_url && (
+                    <a 
+                      href={projects[3].live_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      onClick={(e) => e.stopPropagation()}
+                      className="material-symbols-outlined text-white hover:text-primary-fixed transition-colors bg-black/50 p-1.5 rounded-full backdrop-blur-sm"
+                    >
+                      open_in_new
+                    </a>
+                  )}
+                </div>
                 <img src={projects[3].image_url} alt={projects[3].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent p-6 flex flex-col justify-end">
                   <h3 className="font-headline-md text-lg md:text-xl text-on-surface font-bold">{projects[3].title}</h3>
@@ -387,6 +488,30 @@ export default function ArchivePage() {
                 onClick={() => handleProjectClick(projects[4].id)}
                 className="md:col-span-6 lg:col-span-4 glass-card rounded-2xl overflow-hidden relative group cursor-pointer aspect-square md:aspect-auto"
               >
+                <div className="absolute top-4 right-4 flex gap-2 z-10">
+                  {projects[4].github_url && (
+                    <a 
+                      href={projects[4].github_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      onClick={(e) => e.stopPropagation()}
+                      className="material-symbols-outlined text-white hover:text-secondary transition-colors bg-black/50 p-1.5 rounded-full backdrop-blur-sm"
+                    >
+                      code
+                    </a>
+                  )}
+                  {projects[4].live_url && (
+                    <a 
+                      href={projects[4].live_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      onClick={(e) => e.stopPropagation()}
+                      className="material-symbols-outlined text-white hover:text-secondary transition-colors bg-black/50 p-1.5 rounded-full backdrop-blur-sm"
+                    >
+                      open_in_new
+                    </a>
+                  )}
+                </div>
                 <img src={projects[4].image_url} alt={projects[4].title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent p-6 flex flex-col justify-end">
                   <h3 className="font-headline-md text-lg md:text-xl text-on-surface font-bold">{projects[4].title}</h3>
@@ -400,18 +525,52 @@ export default function ArchivePage() {
               <div 
                 key={project.id}
                 onClick={() => handleProjectClick(project.id)}
-                className="col-span-full md:col-span-6 lg:col-span-4 glass-card rounded-xl p-6 flex flex-col justify-between cursor-pointer hover:border-primary-fixed/40"
+                className="col-span-full md:col-span-6 lg:col-span-4 glass-card rounded-xl p-6 flex flex-col justify-between cursor-pointer hover:border-primary-fixed/40 group transition-all duration-300"
               >
                 <div>
-                  <h3 className="font-headline-md text-lg font-bold mb-1">{project.title}</h3>
-                  <p className="font-body-md text-xs text-on-surface-variant mb-4">{project.description}</p>
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="font-headline-md text-lg font-bold text-on-surface">{project.title}</h3>
+                    <div className="flex gap-2 shrink-0">
+                      {project.github_url && (
+                        <a 
+                          href={project.github_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors"
+                        >
+                          code
+                        </a>
+                      )}
+                      {project.live_url && (
+                        <a 
+                          href={project.live_url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
+                          className="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors"
+                        >
+                          open_in_new
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <p className="font-body-md text-xs text-on-surface-variant mb-4 line-clamp-3">{project.description}</p>
                 </div>
-                <div className="flex flex-wrap gap-1 mt-auto">
-                  {project.tech_stack.map((tech, i) => (
-                    <span key={i} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface">
-                      {tech}
-                    </span>
-                  ))}
+                <div className="mt-auto space-y-4">
+                  {project.image_url && (
+                    <div className="relative h-40 w-full rounded-xl overflow-hidden bg-black/40">
+                      <img src={project.image_url} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+                    </div>
+                  )}
+                  <div className="flex flex-wrap gap-1">
+                    {project.tech_stack.map((tech, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
