@@ -123,9 +123,31 @@ function ContactsTab() {
 function ProjectsTab() {
   const [rows, setRows] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({ title: '', description: '', tech_stack: '', image_url: '', live_url: '', github_url: '', featured: false });
   const [adding, setAdding] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    tech_stack: '',
+    image_url: '',
+    live_url: '',
+    github_url: '',
+    featured: false,
+    category: 'flagship',
+  });
+
+  const [editForm, setEditForm] = useState({
+    title: '',
+    description: '',
+    tech_stack: '',
+    image_url: '',
+    live_url: '',
+    github_url: '',
+    featured: false,
+    category: 'flagship',
+  });
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -145,7 +167,33 @@ function ProjectsTab() {
     }]);
     setSaving(false);
     setAdding(false);
-    setForm({ title: '', description: '', tech_stack: '', image_url: '', live_url: '', github_url: '', featured: false });
+    setForm({ title: '', description: '', tech_stack: '', image_url: '', live_url: '', github_url: '', featured: false, category: 'flagship' });
+    load();
+  };
+
+  const startEdit = (project: any) => {
+    setEditingId(project.id);
+    setEditForm({
+      title: project.title || '',
+      description: project.description || '',
+      tech_stack: Array.isArray(project.tech_stack) ? project.tech_stack.join(', ') : '',
+      image_url: project.image_url || '',
+      live_url: project.live_url || '',
+      github_url: project.github_url || '',
+      featured: project.featured || false,
+      category: project.category || 'flagship',
+    });
+  };
+
+  const saveEdit = async (e: React.FormEvent, id: string) => {
+    e.preventDefault();
+    setSaving(true);
+    await supabase.from('projects').update({
+      ...editForm,
+      tech_stack: editForm.tech_stack.split(',').map((s) => s.trim()).filter(Boolean),
+    }).eq('id', id);
+    setSaving(false);
+    setEditingId(null);
     load();
   };
 
@@ -160,12 +208,20 @@ function ProjectsTab() {
     load();
   };
 
+  const changeCategory = async (id: string, newCategory: string) => {
+    await supabase.from('projects').update({ category: newCategory }).eq('id', id);
+    load();
+  };
+
   const inputCls = 'w-full bg-surface-container-low border border-white/10 rounded-lg px-3 py-2 text-sm text-on-surface focus:border-primary-fixed outline-none transition-all';
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="font-headline-md text-xl font-bold">Projects ({rows.length})</h2>
+        <div>
+          <h2 className="font-headline-md text-xl font-bold">Projects ({rows.length})</h2>
+          <p className="text-xs text-on-surface-variant mt-0.5">Manage Flagship Projects, Hackathon Builds, and Small Practice Projects</p>
+        </div>
         <button onClick={() => setAdding(!adding)} className="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all hover:shadow-[0_0_15px_rgba(0,219,233,0.3)]">
           {adding ? 'Cancel' : '+ Add Project'}
         </button>
@@ -176,16 +232,36 @@ function ProjectsTab() {
           <h3 className="font-bold text-primary-fixed mb-2">New Project</h3>
           <input required className={inputCls} placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
           <textarea required className={inputCls} placeholder="Description" rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+          
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-primary-fixed mb-1 uppercase tracking-wider">Project Category</label>
+              <select 
+                className={inputCls} 
+                value={form.category} 
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+              >
+                <option value="flagship" className="bg-slate-900 text-white">🚀 Flagship Project (Time & Effort)</option>
+                <option value="hackathon" className="bg-slate-900 text-white">⚡ Hackathon Build (Sprint)</option>
+                <option value="small" className="bg-slate-900 text-white">🧪 Small Project (Fun & Practice)</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-primary-fixed mb-1 uppercase tracking-wider">Featured Status</label>
+              <label className="flex items-center gap-2 text-sm cursor-pointer mt-2">
+                <input type="checkbox" checked={form.featured} onChange={(e) => setForm({ ...form, featured: e.target.checked })} className="accent-primary" />
+                <span className="text-on-surface-variant">Mark as Featured</span>
+              </label>
+            </div>
+          </div>
+
           <input required className={inputCls} placeholder="Tech Stack (comma separated)" value={form.tech_stack} onChange={(e) => setForm({ ...form, tech_stack: e.target.value })} />
           <input required className={inputCls} placeholder="Image URL" value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} />
           <div className="grid grid-cols-2 gap-3">
             <input className={inputCls} placeholder="Live URL (optional)" value={form.live_url} onChange={(e) => setForm({ ...form, live_url: e.target.value })} />
             <input className={inputCls} placeholder="GitHub URL (optional)" value={form.github_url} onChange={(e) => setForm({ ...form, github_url: e.target.value })} />
           </div>
-          <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input type="checkbox" checked={form.featured} onChange={(e) => setForm({ ...form, featured: e.target.checked })} className="accent-primary" />
-            <span className="text-on-surface-variant">Mark as Featured</span>
-          </label>
+
           <button type="submit" disabled={saving} className="btn-premium px-6 py-2 rounded-lg text-on-primary-fixed text-xs font-bold uppercase tracking-wider disabled:opacity-50">
             {saving ? 'Saving...' : 'Save Project'}
           </button>
@@ -193,25 +269,115 @@ function ProjectsTab() {
       )}
 
       {loading ? <Spinner /> : (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {rows.map((r) => (
-            <div key={r.id} className="glass-card rounded-xl p-4 flex flex-col md:flex-row gap-3 items-start md:items-center">
-              <img src={r.image_url} alt={r.title} className="w-16 h-16 rounded-lg object-cover bg-surface-container shrink-0" />
-              <div className="flex-1 min-w-0">
-                <p className="font-bold text-on-surface truncate">{r.title}</p>
-                <p className="text-xs text-on-surface-variant truncate">{r.description}</p>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {(r.tech_stack || []).map((t: string) => (
-                    <span key={t} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface">{t}</span>
-                  ))}
+            <div key={r.id} className="glass-card rounded-xl p-5 border border-white/10 transition-all">
+              {editingId === r.id ? (
+                <form onSubmit={(e) => saveEdit(e, r.id)} className="space-y-3">
+                  <h4 className="font-bold text-primary-fixed">Edit Project</h4>
+                  <input required className={inputCls} placeholder="Title" value={editForm.title} onChange={(e) => setEditForm({ ...editForm, title: e.target.value })} />
+                  <textarea required className={inputCls} placeholder="Description" rows={3} value={editForm.description} onChange={(e) => setEditForm({ ...editForm, description: e.target.value })} />
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-primary-fixed mb-1 uppercase tracking-wider">Project Category</label>
+                      <select 
+                        className={inputCls} 
+                        value={editForm.category} 
+                        onChange={(e) => setEditForm({ ...editForm, category: e.target.value })}
+                      >
+                        <option value="flagship" className="bg-slate-900 text-white">🚀 Flagship Project (Time & Effort)</option>
+                        <option value="hackathon" className="bg-slate-900 text-white">⚡ Hackathon Build (Sprint)</option>
+                        <option value="small" className="bg-slate-900 text-white">🧪 Small Project (Fun & Practice)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-primary-fixed mb-1 uppercase tracking-wider">Featured</label>
+                      <label className="flex items-center gap-2 text-sm cursor-pointer mt-2">
+                        <input type="checkbox" checked={editForm.featured} onChange={(e) => setEditForm({ ...editForm, featured: e.target.checked })} className="accent-primary" />
+                        <span className="text-on-surface-variant">Mark as Featured</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <input required className={inputCls} placeholder="Tech Stack (comma separated)" value={editForm.tech_stack} onChange={(e) => setEditForm({ ...editForm, tech_stack: e.target.value })} />
+                  <input required className={inputCls} placeholder="Image URL" value={editForm.image_url} onChange={(e) => setEditForm({ ...editForm, image_url: e.target.value })} />
+                  <div className="grid grid-cols-2 gap-3">
+                    <input className={inputCls} placeholder="Live URL (optional)" value={editForm.live_url} onChange={(e) => setEditForm({ ...editForm, live_url: e.target.value })} />
+                    <input className={inputCls} placeholder="GitHub URL (optional)" value={editForm.github_url} onChange={(e) => setEditForm({ ...editForm, github_url: e.target.value })} />
+                  </div>
+
+                  <div className="flex gap-2 pt-2">
+                    <button type="submit" disabled={saving} className="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg text-xs font-bold uppercase">
+                      {saving ? 'Saving...' : 'Save Changes'}
+                    </button>
+                    <button type="button" onClick={() => setEditingId(null)} className="bg-surface-container-highest px-4 py-2 rounded-lg text-xs font-bold uppercase">
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+                  <div className="flex gap-4 items-center flex-1 min-w-0">
+                    <img src={r.image_url} alt={r.title} className="w-16 h-16 rounded-xl object-cover bg-surface-container shrink-0 border border-white/10" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <p className="font-bold text-on-surface truncate text-base">{r.title}</p>
+                        
+                        {/* Interactive Category Selector Dropdown */}
+                        <select 
+                          value={r.category || 'flagship'} 
+                          onChange={(e) => changeCategory(r.id, e.target.value)}
+                          className={`px-2.5 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider border cursor-pointer outline-none ${
+                            r.category === 'flagship' ? 'bg-primary-container/20 text-primary-fixed border-primary-fixed/40' :
+                            r.category === 'hackathon' ? 'bg-secondary/20 text-secondary border-secondary/40' :
+                            'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                          }`}
+                        >
+                          <option value="flagship" className="bg-slate-900 text-white">🚀 Flagship Project</option>
+                          <option value="hackathon" className="bg-slate-900 text-white">⚡ Hackathon Build</option>
+                          <option value="small" className="bg-slate-900 text-white">🧪 Small / Practice</option>
+                        </select>
+                      </div>
+                      
+                      <p className="text-xs text-on-surface-variant line-clamp-1">{r.description}</p>
+                      
+                      <div className="flex flex-wrap gap-1 mt-1.5">
+                        {(r.tech_stack || []).map((t: string) => (
+                          <span key={t} className="px-2 py-0.5 bg-surface-container-highest rounded text-[10px] text-on-surface-variant font-mono">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+                    <button 
+                      onClick={() => toggleFeatured(r.id, r.featured)} 
+                      className={`px-3 py-1.5 rounded-lg text-[11px] font-bold border transition-colors ${
+                        r.featured 
+                          ? 'border-primary-fixed text-primary-fixed bg-primary-fixed/10' 
+                          : 'border-white/10 text-on-surface-variant hover:border-white/20'
+                      }`}
+                    >
+                      {r.featured ? '★ Featured' : '☆ Feature'}
+                    </button>
+                    
+                    <button 
+                      onClick={() => startEdit(r)} 
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold border border-primary-fixed/30 text-primary-fixed hover:bg-primary-fixed/10 transition-colors"
+                    >
+                      Edit
+                    </button>
+
+                    <button 
+                      onClick={() => del(r.id)} 
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold border border-error/30 text-error hover:bg-error/10 transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-2 shrink-0">
-                <button onClick={() => toggleFeatured(r.id, r.featured)} className={`px-3 py-1 rounded text-[10px] font-semibold border transition-colors ${r.featured ? 'border-primary-fixed text-primary-fixed bg-primary-fixed/10' : 'border-white/10 text-on-surface-variant'}`}>
-                  {r.featured ? '★ Featured' : '☆ Feature'}
-                </button>
-                <button onClick={() => del(r.id)} className="text-error hover:bg-error/10 px-3 py-1 rounded text-xs font-semibold border border-error/30">Delete</button>
-              </div>
+              )}
             </div>
           ))}
         </div>

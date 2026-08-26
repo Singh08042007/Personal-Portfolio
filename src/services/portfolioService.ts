@@ -9,6 +9,7 @@ export interface Project {
   live_url?: string;
   github_url?: string;
   featured: boolean;
+  category?: 'flagship' | 'hackathon' | 'small' | string;
   created_at?: string;
 }
 

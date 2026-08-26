@@ -3,30 +3,70 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: #020203;
-    color: #e5e2e3;
+    background-color: #030305;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(0, 240, 255, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.05) 0px, transparent 50%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    color: #f1f5f9;
     overflow-x: hidden;
     font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-/* Glassmorphism Styles */
+.page-snap-container {
+  scroll-behavior: smooth;
+}
+
+.page-snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mobile Responsive Optimization: Auto height for seamless touch flow on small screens */
+@media (max-width: 767px) {
+  .page-snap-section {
+    min-height: auto;
+    padding-top: 5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+/* Hide scrollbars for clean mobile horizontal touch swipes */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Corporate Glassmorphism & Card Styles */
 .glass-card {
-  background: rgba(15, 15, 18, 0.5);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  /* Top-left light leak simulation */
-  border: 1px solid rgba(148, 163, 184, 0.08);
-  border-top-color: rgba(255, 255, 255, 0.2);
-  border-left-color: rgba(255, 255, 255, 0.2);
+  background: rgba(10, 11, 16, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.15);
   position: relative;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card::before {
@@ -190,6 +230,27 @@
 
 .ambient-purple {
   animation: ambient-pulse 18s infinite ease-in-out alternate-reverse;
+}
+
+/* Seamless Continuous Infinite Marquee Loop for Certificates */
+@keyframes infinite-marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-marquee {
+  display: flex;
+  width: max-content;
+  animation: infinite-marquee-left 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-infinite-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* Custom Scanning Terminal Line Effect */
