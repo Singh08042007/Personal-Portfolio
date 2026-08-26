@@ -156,7 +156,20 @@ export default function ArchivePage() {
           portfolioService.getProjects(),
           portfolioService.getCertificates(),
         ]);
-        setProjects(projData.length > 0 ? projData : defaultProjects);
+
+        const rawProjects = projData.length > 0 ? projData : defaultProjects;
+        
+        let localCategories: Record<string, string> = {};
+        try {
+          localCategories = JSON.parse(localStorage.getItem('ds_project_categories') || '{}');
+        } catch (e) {}
+
+        const mergedProjects = rawProjects.map((p) => ({
+          ...p,
+          category: (localCategories[p.id] || p.category) as any,
+        }));
+
+        setProjects(mergedProjects);
         
         // Match Supabase's certifications logic
         // If Supabase doesn't specify categories directly, we can check title keywords

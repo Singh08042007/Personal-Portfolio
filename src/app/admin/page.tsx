@@ -152,7 +152,19 @@ function ProjectsTab() {
   const load = useCallback(async () => {
     setLoading(true);
     const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
-    setRows(data ?? []);
+    
+    // Retrieve local category overrides fallback
+    let localCategories: Record<string, string> = {};
+    try {
+      localCategories = JSON.parse(localStorage.getItem('ds_project_categories') || '{}');
+    } catch (e) {}
+
+    const merged = (data ?? []).map((p: any) => ({
+      ...p,
+      category: localCategories[p.id] || p.category || 'flagship',
+    }));
+
+    setRows(merged);
     setLoading(false);
   }, []);
 
@@ -161,10 +173,18 @@ function ProjectsTab() {
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    await supabase.from('projects').insert([{
+    const newProj = {
       ...form,
       tech_stack: form.tech_stack.split(',').map((s) => s.trim()).filter(Boolean),
-    }]);
+    };
+    const { data, error } = await supabase.from('projects').insert([newProj]).select();
+    if (data && data[0]) {
+      try {
+        const stored = JSON.parse(localStorage.getItem('ds_project_categories') || '{}');
+        stored[data[0].id] = form.category;
+        localStorage.setItem('ds_project_categories', JSON.stringify(stored));
+      } catch (e) {}
+    }
     setSaving(false);
     setAdding(false);
     setForm({ title: '', description: '', tech_stack: '', image_url: '', live_url: '', github_url: '', featured: false, category: 'flagship' });
@@ -188,29 +208,73 @@ function ProjectsTab() {
   const saveEdit = async (e: React.FormEvent, id: string) => {
     e.preventDefault();
     setSaving(true);
-    await supabase.from('projects').update({
+
+    // Save to local storage cache immediately
+    try {
+      const stored = JSON.parse(localStorage.getItem('ds_project_categories') || '{}');
+      stored[id] = editForm.category;
+      localStorage.setItem('ds_project_categories', JSON.stringify(stored));
+    } catch (e) {}
+
+    // Optimistically update React rows state immediately
+    setRows((prev) =>
+      prev.map((r) =>
+        r.id === id
+          ? {
+              ...r,
+              ...editForm,
+              tech_stack: editForm.tech_stack.split(',').map((s) => s.trim()).filter(Boolean),
+            }
+          : r
+      )
+    );
+
+    const { error } = await supabase.from('projects').update({
       ...editForm,
       tech_stack: editForm.tech_stack.split(',').map((s) => s.trim()).filter(Boolean),
     }).eq('id', id);
+
+    if (error) {
+      console.warn('Supabase update warning:', error.message);
+    }
+
     setSaving(false);
     setEditingId(null);
-    load();
   };
 
   const del = async (id: string) => {
     if (!confirm('Delete this project?')) return;
+    setRows((prev) => prev.filter((r) => r.id !== id));
     await supabase.from('projects').delete().eq('id', id);
-    load();
   };
 
   const toggleFeatured = async (id: string, current: boolean) => {
+    setRows((prev) => prev.map((r) => r.id === id ? { ...r, featured: !current } : r));
     await supabase.from('projects').update({ featured: !current }).eq('id', id);
-    load();
   };
 
   const changeCategory = async (id: string, newCategory: string) => {
-    await supabase.from('projects').update({ category: newCategory }).eq('id', id);
-    load();
+    // 1. Optimistically update local React state INSTANTLY so Admin UI updates dropdown without lag
+    setRows((prev) =>
+      prev.map((r) => (r.id === id ? { ...r, category: newCategory } : r))
+    );
+
+    // 2. Persist in localStorage as persistent cache fallback
+    try {
+      const stored = JSON.parse(localStorage.getItem('ds_project_categories') || '{}');
+      stored[id] = newCategory;
+      localStorage.setItem('ds_project_categories', JSON.stringify(stored));
+    } catch (e) {}
+
+    // 3. Persist in Supabase
+    try {
+      const { error } = await supabase.from('projects').update({ category: newCategory }).eq('id', id);
+      if (error) {
+        console.warn('Supabase category update warning:', error.message);
+      }
+    } catch (err) {
+      console.warn('Supabase category update error:', err);
+    }
   };
 
   const inputCls = 'w-full bg-surface-container-low border border-white/10 rounded-lg px-3 py-2 text-sm text-on-surface focus:border-primary-fixed outline-none transition-all';
